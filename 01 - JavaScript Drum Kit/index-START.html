@@ -8,11 +8,10 @@
 </head>
 <body>
 
-
   <div class="keys">
-    <div data-key="65" class="key">
+    <div data-key="65"  class="key" >
       <kbd>A</kbd>
-      <span class="sound">clap</span>
+      <span  class="sound">clap</span>
     </div>
     <div data-key="83" class="key">
       <kbd>S</kbd>
@@ -60,8 +59,32 @@
 
 <script>
 
+      // 1 add listener to keydown event✅
+      // 2 get the keyCode✅
+      // 3 play sound based on the keyCode✅
+      // 4 add and remove .playing class on the keyCode event✅
+
+document.addEventListener('keydown', function(e) { 
+    const keyCode = e.keyCode
+
+    playSound(keyCode)
+    changeElement(keyCode)
+
+})
+
+const playSound = (keyCode) => {
+     const sound = document.querySelector(`audio[data-key="${keyCode}"]`);
+     sound.play()
+     sound.currentTime = 0;
+}
+
+const changeElement = (keyCode) => {
+  const effect = document.querySelector(`.key[data-key="${keyCode}"]`);
+  effect.classList.toggle('playing')
+     setTimeout( () => {
+      effect.classList.toggle('playing')
+     }, 100)
+}
 </script>
-
-
 </body>
 </html>
